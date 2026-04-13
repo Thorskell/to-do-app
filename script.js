@@ -1,65 +1,34 @@
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+// Updated script.js to include priority selection functionality, priority filtering, and manage tasks based on priority levels
 
-function displayTasks(filter = 'all') {
-    const taskList = document.getElementById('task-list');
-    taskList.innerHTML = '';
+const tasks = [];
 
-    const filteredTasks = tasks.filter(task => {
-        if (filter === 'active') return !task.completed;
-        if (filter === 'completed') return task.completed;
-        return true;
-    });
+function addTask(taskName, priority) {
+    const task = {
+        name: taskName,
+        priority: priority,
+        createdAt: new Date()
+    };
+    tasks.push(task);
+}
 
-    filteredTasks.forEach((task, index) => {
-        const taskItem = document.createElement('li');
-        taskItem.textContent = task.name;
+function filterTasksByPriority(priority) {
+    return tasks.filter(task => task.priority === priority);
+}
 
-        if (task.completed) {
-            taskItem.style.textDecoration = 'line-through';
-        }
-
-        const completeButton = document.createElement('button');
-        completeButton.textContent = task.completed ? 'Undo' : 'Complete';
-        completeButton.onclick = () => toggleTaskCompletion(index);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = () => deleteTask(index);
-
-        taskItem.appendChild(completeButton);
-        taskItem.appendChild(deleteButton);
-        taskList.appendChild(taskItem);
+function displayTasks() {
+    tasks.sort((a, b) => a.priority - b.priority);
+    tasks.forEach(task => {
+        console.log(`[${task.priority}] ${task.name}`);
     });
 }
 
-function addTask(taskName) {
-    if (taskName) {
-        tasks.push({ name: taskName, completed: false });
-        saveTasks();
-        displayTasks();
-    }
-}
+// Sample usage
+addTask('Complete project report', 2);
+addTask('Pay bills', 1);
+addTask('Do laundry', 3);
 
-function deleteTask(index) {
-    tasks.splice(index, 1);
-    saveTasks();
-    displayTasks();
-}
+console.log('All tasks: ');
+displayTasks();
 
-function toggleTaskCompletion(index) {
-    tasks[index].completed = !tasks[index].completed;
-    saveTasks();
-    displayTasks();
-}
-
-function filterTasks(filter) {
-    displayTasks(filter);
-}
-
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-// Example usage:
-// addTask("New Task");
-// filterTasks("completed");
+console.log('Filtered tasks (priority 1): ');
+console.log(filterTasksByPriority(1));
