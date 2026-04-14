@@ -1,12 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR" data-theme="light">
 <head>
-    <title>Current Date and User</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To‑Do App Profissional</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <h1>Current Date and Time (UTC)</h1>
-    <p>2026-04-13 23:31:45</p>
-    <h1>Current User's Login</h1>
-    <p>Thorskell</p>
+  <main class="container" aria-label="Aplicação de lista de tarefas">
+
+    <header class="header">
+      <h1>To‑Do List</h1>
+
+      <button id="toggle-theme" aria-label="Alternar modo escuro">
+        <i class="fas fa-moon"></i>
+      </button>
+    </header>
+
+    <section class="input-group">
+      <input
+        id="task-input"
+        type="text"
+        placeholder="Digite uma tarefa..."
+        aria-label="Descrição da tarefa"
+      >
+
+      <select id="priority-select" aria-label="Prioridade">
+        <option value="high">Alta</option>
+        <option value="medium">Média</option>
+        <option value="low">Baixa</option>
+      </select>
+
+      <button id="add-task">
+        <i class="fas fa-plus"></i>
+      </button>
+    </section>
+
+    <section class="filters">
+      <button data-filter="all" class="active">Todas</button>
+      <button data-filter="pending">Pendentes</button>
+      <button data-filter="completed">Concluídas</button>
+    </section>
+
+    <ul id="task-list" aria-live="polite"></ul>
+
+    <footer class="footer">
+      <span id="task-counter"></span>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
