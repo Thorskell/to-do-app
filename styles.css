@@ -1,24 +1,147 @@
-.high-priority {
-    color: red;
-    font-weight: bold;
+:root {
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #6366f1;
+  --high: #ef4444;
+  --medium: #f59e0b;
+  --low: #10b981;
 }
 
-.medium-priority {
-    color: orange;
-    font-weight: normal;
+[data-theme="dark"] {
+  --bg: #111827;
+  --card: #1f2937;
+  --text: #f9fafb;
+  --muted: #9ca3af;
 }
 
-.low-priority {
-    color: green;
-    font-weight: normal;
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-/* General app styling */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  transition: background 0.3s;
 }
+
 .container {
-    padding: 20px;
+  background: var(--card);
+  width: 100%;
+  max-width: 420px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 1.6rem;
+}
+
+#toggle-theme {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.input-group {
+  display: flex;
+  gap: .5rem;
+  margin: 1rem 0;
+}
+
+.input-group input,
+.input-group select {
+  flex: 1;
+  padding: .6rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.input-group button {
+  background: var(--primary);
+  border: none;
+  color: white;
+  padding: 0 .8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.filters button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.filters .active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .8rem;
+  margin-bottom: .5rem;
+  border-radius: 10px;
+  animation: fadeIn .3s ease;
+}
+
+.task.high { background: var(--high); }
+.task.medium { background: var(--medium); }
+.task.low { background: var(--low); }
+
+.task span {
+  flex: 1;
+}
+
+.task.completed span {
+  text-decoration: line-through;
+  opacity: .7;
+}
+
+.task button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-left: .5rem;
+}
+
+.footer {
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
